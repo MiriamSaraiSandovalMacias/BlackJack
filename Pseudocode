@@ -1,0 +1,39 @@
+INICIO
+Variables:
+int:  jugador, maquina, draw_card
+char: continuar
+Escribir: Reglas del juego
+jugador += draw_card
+Escribir: Primer carta del jugador
+jugador += draw_card
+Escribir: Segunda carta del jugador
+Escribir: Puntaje total al momento del jugador
+Hacer 
+	¿Quieres robar una carta?  (s/n)
+	Leer continuar
+	jugador += draw_card
+	Escribir: Tu nuevo puntaje
+	Si el puntaje del jugador >21 terminar el juego
+	Si el puntaje del jugador =21 terminar el juego
+	Mientras Continuar== s
+	Fin del bucle 
+maquina += draw_card
+maquina += draw_card
+Mientras la computadora quiera robar más cartas
+	maquina += draw_card
+	mostrar resultado de la maquina
+		Si el puntaje de la maquina > 21
+		Terminar el juego
+		Si el puntaje de la maquina = 21
+		Terminar el juego
+Fin del bucle
+
+Si el puntaje del jugador > puntaje de la maquina y el puntaje del jugador <= 21
+Escribir: Ganaste
+Si el puntaje de la maquina > puntaje del jugador y el puntaje de la maquina <=21
+Escribir: Perdiste
+Si el puntaje de la maquina = puntaje del jugador
+Escribir: Empate
+Escribir: Preguntar al jugador si quiere otra ronda más?
+
+FIN
