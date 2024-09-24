@@ -1,5 +1,6 @@
 # BlackJack
 A simple Blackjack game in C++".
+
 Integrantes del equipo:
 Miriam Sarai Sandoval Macias
 Sebastian Yael Espejel Ordaz
