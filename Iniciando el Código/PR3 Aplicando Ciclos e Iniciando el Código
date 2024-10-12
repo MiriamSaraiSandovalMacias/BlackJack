@@ -1,0 +1,114 @@
+Codigo fuente:
+#include <iostream>
+#include <random>
+#include <string>
+
+using namespace std;
+int player = 0;
+int dealer = 0;
+string playerMessage = "Las cartas del jugador son: ";
+string dealerMessage = "Las cartas del dealer son: ";
+int cards[52];
+
+void createDeck() {
+	int cardValue = 2;
+	int cardCount = 0;
+	for (int figure = 1; figure <= 4; figure++) {
+		for (int card = 1; card <= 13; card++) {
+			switch (card) {
+			case 10:
+			case 11:
+			case 12:
+				cardValue = 10;
+				break;
+			case 13:
+				cardValue = 11;
+				break;
+			default:
+				break;
+			}
+			cards[cardCount] = cardValue;
+			cardCount++;
+			cardValue++;
+		}
+		cardValue = 2;
+	}
+}
+int drawCard() {
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<int> dist(1, 52);
+	int card = dist(gen);
+	return cards[card - 1];
+}
+
+int main() {
+	char robar, continuar;
+	createDeck();
+	do {
+		player = 0;
+		dealer = 0;
+		int card1 = drawCard();
+		int card2 = drawCard();
+		cout << playerMessage << card1 << " " << "y " << card2 << endl;
+		player += card1;
+		player += card2;
+		cout << "Total del jugador: " << player << endl;
+		while (player <21) {
+			cout << "Quieres robar otra carta? (s/n): ";
+			cin >> robar;
+			if (robar == 's') {
+				int card = drawCard();
+				cout << "Tu nueva carta es: " << card << endl;
+				player += card;
+				cout << "Tu nuevo total es: " << player << endl;
+			}
+			else {
+				break;
+			}
+		}
+		card1 = drawCard();
+		card2 = drawCard();
+		dealer += card1;
+		dealer += card2;
+		do {
+			card1 = drawCard();
+			dealer += card1;
+			if (dealer >= 21) {
+				break;
+			}
+		} while (dealer <= 19);
+		cout << dealerMessage << dealer << endl;
+
+		if (player == 21) {
+
+			cout << "Ganaste, tienes exactamente 21!" << endl;
+		}
+		else if (player > 21) {
+
+			cout << "Perdiste, te pasaste de 21!" << endl;
+		}
+		else if (player == dealer) {
+
+			cout << "Empate!" << endl;
+		}
+		else if (player < 21 && player > dealer) {
+
+			cout << "Ganaste, tienes más puntos que el dealer!" << endl;
+		}
+		else if (dealer > 21) {
+
+			cout << "Ganaste, el dealer se pasó de 21!" << endl;
+		}
+		else if (player < dealer && dealer <= 21) {
+			cout << "Perdiste, el dealer tiene más puntos que tú!" << endl;
+		}
+
+		cout << " " << endl;
+		cout << "Quieres seguir jugando? (s/n): ";
+		cin >> continuar;
+		cout <<" " << endl;
+
+	} while (continuar == 's');
+
+}
